@@ -1,0 +1,15 @@
+# This script is meant for a first setup of ZSH with common useful plugins:
+# 1. Git: display current branch, status, commits
+# 2. Autosuggestions: these are grabbed from history, use right arrow to accept. Super useful to retrieve previously used commands
+# 3. Syntax highlighting: self-explanatory
+# Last but not least: the beautiful Powerlevel 10k theme
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended && \
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k && \
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
+sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc && \
+sed -i 's/^plugins=.*/plugins=(git zsh-autosuggestions zsh-syntax-highlighting)/' ~/.zshrc && \
+echo "Installation complete! Running zsh for automatic setup..."
+zsh
+chsh -s $(which zsh) # JIC process was incomplete
